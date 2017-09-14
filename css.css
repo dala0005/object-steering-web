@@ -1,3 +1,28 @@
-div.clear{
+div.clear {
 	clear:both;
+}
+
+div.video_div {
+  float:left; 
+  border-style:solid; 
+  border-width:5px; 
+  width:650px; 
+  height:490px; 
+  margin:0px; 
+  background-color:#C0C0C0
+}
+
+div.nickname_div {
+  float:right; 
+  border-style:solid; 
+  border-width:5px 5px 5px 0px; 
+  margin:0px; 
+  width:490px; 
+  height:490px; 
+  background-color:#C0C0C0
+}
+
+div.command_div {
+  border-style:solid; 
+  border-width:0px 5px 5px 5px;
 }
