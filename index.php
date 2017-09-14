@@ -7,10 +7,17 @@
   	<link rel="stylesheet" href="./bootstrap-3.3.4-dist/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   	<link rel="stylesheet" type="text/css" href="css.css">
-  	<script src="bootstrap-3.3.4-distjs/bootstrap.min.js"></script>
+	  <script src="bootstrap-3.3.4-distjs/bootstrap.min.js"></script>
+	 
+	 <?php
+	 	/* DEFINES */
+		define('VIDEO_WIDTH', 640);
+		define('VIDEO_HEIGHT', 480);
+	  ?>
   	<script>
 		$(document).ready(function()
 		{
+			/* javascript keybinding */
 			var key = {
 				LEFT: 37,
 				UP: 38,
@@ -18,6 +25,7 @@
 				DOWN: 40
 			};
 
+			/* keybinding to the object */
 			var command = {
 				LEFT: 0x08,
 				UP: 0x04,
@@ -27,9 +35,10 @@
 
 			key_value = 0;
 
+
+			/* KEY PRESSED */
 			$(document).keypress(function(e) {
 				
-				/* KEY PRESSED */
 				if(e.keyCode == key.LEFT) {
 					if((key_value & command.RIGHT) != command.RIGHT) {
 						$('#button_left').css({'background-color': '#ffff'});
@@ -109,9 +118,10 @@
 
 <body>
 
+	
 	<div class="container">	
 		<div class="video_div">
-		<video width="640" height="480" controls>
+		<video width=<?php echo '"' . VIDEO_WIDTH . '"' ?> height=<?php echo '"' . VIDEO_HEIGHT . '"' ?> controls>
   			<source src="" type="video/mp4">
 			Your browser does not support the video tag.
 		</video> 
