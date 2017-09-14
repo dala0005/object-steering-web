@@ -10,6 +10,97 @@
   	<script>
 		$(document).ready(function()
 		{
+			var key = {
+				LEFT: 37,
+				UP: 38,
+				RIGHT: 39,
+				DOWN: 40
+			};
+
+			var command = {
+				LEFT: 0x08,
+				UP: 0x04,
+				RIGHT: 0x01,
+				DOWN: 0x02
+			}
+
+			key_value = 0;
+
+			$(document).keypress(function(e) {
+				
+				/* KEY PRESSED */
+				if(e.keyCode == key.LEFT) {
+					if((key_value & command.RIGHT) != command.RIGHT) {
+						$('#button_left').css({'background-color': '#ffff'});
+						key_value = (key_value | command.LEFT);
+					}
+				}
+
+
+				if(e.keyCode == key.RIGHT) {
+					if((key_value & command.LEFT) != command.LEFT) {
+						$('#button_right').css({'background-color': '#ffff'});
+						key_value = (key_value | command.RIGHT);
+					}
+				}
+
+
+				if(e.keyCode == key.UP) {
+					if((key_value & command.DOWN) != command.DOWN) {
+						$('#button_up').css({'background-color': '#ffff'});
+						key_value = (key_value | command.UP);
+					}
+				}
+
+
+				if(e.keyCode == key.DOWN) {
+					if((key_value & command.UP) != command.UP) {
+						$('#button_down').css({'background-color': '#ffff'});
+						key_value = (key_value | command.DOWN);
+					}
+				}
+
+				if(key_value != 0) {
+					$.post("send_command.php", {key_value:key_value}, function(){
+						
+					});
+				}	
+				
+			});
+
+
+			/* KEY RELEASED */
+			$(document).keyup(function(e) {
+				if(e.keyCode == key.LEFT) {
+					if((key_value & command.LEFT) == command.LEFT) {
+						$('#button_left').css({'background-color': '#eeee'});
+						key_value = (key_value ^ command.LEFT);
+					}
+				}
+
+				if(e.keyCode == key.RIGHT) {
+					if((key_value & command.RIGHT) == command.RIGHT) {
+						$('#button_right').css({'background-color': '#eeee'});
+						key_value = (key_value ^ command.RIGHT);
+					}
+				}
+
+
+				if(e.keyCode == key.UP) {
+					if((key_value & command.UP) == command.UP) {
+						$('#button_up').css({'background-color': '#eeee'});
+						key_value = (key_value ^ command.UP);
+					}
+				}
+
+				if(e.keyCode == key.DOWN) {
+					if((key_value & command.DOWN) == command.DOWN) {
+						$('#button_down').css({'background-color': '#eeee'});
+						key_value = (key_value ^ command.DOWN);
+					}
+				}
+				
+			});
 
 		});
 	</script>
@@ -32,10 +123,10 @@
 		<div class="command_div clear" style="border-style:solid; border-width:0px 5px 5px 5px;">
 			<h1>Keys</h1>
 			<div class="btn-group" role="group" aria-label="Basic example">
-				<button type="button" class="btn btn-secondary" style="font-size:100px">&larr;</button>
-				<button type="button" class="btn btn-secondary" style="font-size:100px; margin-left:10px">&uarr;</button>
-				<button type="button" class="btn btn-secondary" style="font-size:100px; margin-left:10px">&darr;</button>
-				<button type="button" class="btn btn-secondary" style="font-size:100px; margin-left:10px">&rarr;</button>
+				<button id="button_left" type="button" class="btn btn-secondary" style="font-size:100px">&larr;</button>
+				<button id="button_up" type="button" class="btn btn-secondary" style="font-size:100px; margin-left:10px">&uarr;</button>
+				<button id="button_down" type="button" class="btn btn-secondary" style="font-size:100px; margin-left:10px">&darr;</button>
+				<button id="button_right" type="button" class="btn btn-secondary" style="font-size:100px; margin-left:10px">&rarr;</button>
 			</div>		
 		</div>
    </div>
