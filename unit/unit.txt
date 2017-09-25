@@ -1,0 +1,25 @@
+
+
+    .---------------.
+    | Webbrowser    |                           computer / phone
+    '---------------'                       ------------------------------
+          ^     ^
+ video    |     | data channel                  internet. HTTP?
+ stream   |     |
+          |     V
+    .-------------------.                   -------------------------------
+    |    WebRTC Server  |                     
+    '-------------------'                     
+            ^                                 
+            |   system calls??                  RASPBERRY PI
+            V                                 
+    .-----------------------------------.    
+    | Unit "frontend". forward commands |          
+    | to unit hardware.                 |     
+    '-----------------------------------'   -------------------------------
+        |                        
+        |i2c                                   unit's local protocols
+        |                                            
+    .--------.                              -------------------------------
+    | Unit 1 |                              Unit Hardware (car, copter etc..)
+    '--------'  
